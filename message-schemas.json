@@ -1,0 +1,20 @@
+{
+  "ACK": {
+    "type": "object",
+    "properties": {
+      "type": { "type": "string", "enum": ["ACK"] },
+      "message": { "type": "string" }
+    },
+    "required": ["type", "message"],
+    "additionalProperties": false
+  },
+  "ERROR": {
+    "type": "object",
+    "properties": {
+      "type": { "type": "string", "enum": ["ERROR"] },
+      "message": { "type": "string" }
+    },
+    "required": ["type", "message"],
+    "additionalProperties": false
+  }
+}
