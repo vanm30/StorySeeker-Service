@@ -8,34 +8,29 @@ const schemaFilePath = path.resolve('message-schemas.json');
 const schemas = JSON.parse(fs.readFileSync(schemaFilePath, 'utf-8'));
 
 export const compiledSchemas = {};
+
 Object.keys(schemas).forEach((key) => {
   compiledSchemas[key] = ajv.compile(schemas[key]);
 });
 
-export function createMessage(type, content) {
-  const schema = schemas[type];
-  if (!schema) {
-    throw new Error(`Unknown message type: ${type}`);
+export function validateMessageFormat(message) {
+  //Validate Type
+  const { type } = message || null;
+  if (!type || !compiledSchemas[type]) {
+    console.log(`Message is missing type`);
+    return 0;
   }
-  const message = { type, ...content };
 
+  //Validate format (schema)
   const validate = compiledSchemas[type];
-  if (validate && !validate(message)) {
-    throw new Error(
+  if (!validate(message)) {
+    console.error(
       `Invalid message format for type ${type}: ${ajv.errorsText(
         validate.errors
       )}`
     );
+    return 0;
   }
 
-  return JSON.stringify(message);
-}
-
-export function parseMessage(message) {
-  try {
-    return JSON.parse(message);
-  } catch (e) {
-    console.error(`Error when parsing message: ${e}`);
-    return null;
-  }
+  return 1;
 }
