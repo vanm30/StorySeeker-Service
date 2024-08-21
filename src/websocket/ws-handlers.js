@@ -34,11 +34,17 @@ export function handleReceivedMessage(ws, message) {
 }
 
 export async function handleGenerateSuggestion(ws, parsedMessage) {
-  const suggestions = await generateSugestions();
+  const { query } = parsedMessage;
+  const suggestions = await generateSugestions(query);
 
-  ws.send(
-    createMessage('RESPONSE_GENERATE_SUGGESTION', {
-      suggestions: suggestions,
-    })
-  );
+  console.log(suggestions);
+  const message = suggestions.choices[0].message;
+
+  console.log(message);
+
+  // ws.send(
+  //   createMessage('RESPONSE_GENERATE_SUGGESTION', {
+  //     suggestions: suggestions,
+  //   })
+  // );
 }

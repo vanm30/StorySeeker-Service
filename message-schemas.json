@@ -26,32 +26,41 @@
     "required": ["type", "query"],
     "additionalProperties": false
   },
+
   "RESPONSE_GENERATE_SUGGESTION": {
     "type": "object",
     "properties": {
       "type": { "type": "string", "enum": ["RESPONSE_GENERATE_SUGGESTION"] },
       "suggestions": {
         "type": "object",
-        "books": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {}
-          },
-          "required": [],
-          "additionalProperties": false
-        },
-        "movies": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {"type": "string"}
+        "properties": {
+          "books": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": { "type": "string" },
+                "author": { "type": "string" }
+              },
+              "required": ["title", "author"],
+              "additionalProperties": false
             }
           },
-          "required": [],
-          "additionalProperties": false
-        }
+          "movies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "director": { "type": "string" }
+              },
+              "required": ["name", "director"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["books", "movies"],
+        "additionalProperties": false
       }
     },
     "required": ["type", "suggestions"],

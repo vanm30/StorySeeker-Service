@@ -1,41 +1,28 @@
-import OpenAI from "openai";
+import OpenAI from 'openai';
+import { schemas } from '../utils/getSchemas.js';
 
-const openai = new OpenAI();
-
-export async function generateSugestions() {
-
-  
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "Your job is to generate movies or books suggestions based on users explanation or feelings." }],
-    model: "gpt-4o-mini",
+export async function generateSugestions(query) {
+  const openai = new OpenAI();
+  const schema = schemas['RESPONSE_GENERATE_SUGGESTION'];
+  const suggestions = await openai.chat.completions.create({
+    messages: [
+      {
+        role: 'system',
+        content:
+          'Your job is to generate movies or books suggestions based on users explanation or feelings.',
+      },
+      { role: 'user', content: query },
+    ],
+    model: 'gpt-4o-mini',
     response_format: {
-        type: "json_schema",
-        json_schema: {
-            name: "math_response",
-            schema: {
-                type: "object",
-                properties: {
-                    steps: {
-                        type: "array",
-                        items: {
-                            type: "object",
-                            properties: {
-                                explanation: { type: "string" },
-                                output: { type: "string" }
-                            },
-                            required: ["explanation", "output"],
-                            additionalProperties: false
-                        }
-                    },
-                    final_answer: { type: "string" }
-                },
-                required: ["steps", "final_answer"],
-                additionalProperties: false
-            },
-            strict: true
-        }
-    }
+      type: 'json_schema',
+      json_schema: {
+        name: 'RESPONSE_GENERATE_SUGGESTION',
+        schema: schema,
+        strict: true,
+      },
+    },
   });
 
-  return ['yo', 'yo'];
+  return suggestions;
 }
