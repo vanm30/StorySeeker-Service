@@ -26,7 +26,6 @@
     "required": ["type", "query"],
     "additionalProperties": false
   },
-
   "RESPONSE_GENERATE_SUGGESTION": {
     "type": "object",
     "properties": {
@@ -39,10 +38,29 @@
             "items": {
               "type": "object",
               "properties": {
-                "title": { "type": "string" },
-                "author": { "type": "string" }
+                "name": { "type": "string" },
+                "coverImage": { "type": "string" },
+                "link": { "type": "string" },
+                "shortDesc": { "type": "string" },
+                "plot": { "type": "string" },
+                "genre": { "type": "string" },
+                "rating": { "type": "string" },
+                "author": { "type": "string" },
+                "ISBN": { "type": "string" },
+                "pageCount": { "type": "string" }
               },
-              "required": ["title", "author"],
+              "required": [
+                "name",
+                "coverImage",
+                "link",
+                "shortDesc",
+                "plot",
+                "genre",
+                "rating",
+                "author",
+                "ISBN",
+                "pageCount"
+              ],
               "additionalProperties": false
             }
           },
@@ -52,9 +70,28 @@
               "type": "object",
               "properties": {
                 "name": { "type": "string" },
-                "director": { "type": "string" }
+                "coverImage": { "type": "string" },
+                "link": { "type": "string" },
+                "shortDesc": { "type": "string" },
+                "plot": { "type": "string" },
+                "genre": { "type": "string" },
+                "rating": { "type": "string" },
+                "director": { "type": "string" },
+                "boxOffice": { "type": "string" },
+                "runtime": { "type": "string" }
               },
-              "required": ["name", "director"],
+              "required": [
+                "name",
+                "coverImage",
+                "link",
+                "shortDesc",
+                "plot",
+                "genre",
+                "rating",
+                "director",
+                "boxOffice",
+                "runtime"
+              ],
               "additionalProperties": false
             }
           }

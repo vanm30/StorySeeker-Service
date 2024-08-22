@@ -19,7 +19,7 @@ export async function generateSugestions(query) {
       json_schema: {
         name: 'RESPONSE_GENERATE_SUGGESTION',
         schema: schema,
-        strict: true,
+        strict: true
       },
     },
   });

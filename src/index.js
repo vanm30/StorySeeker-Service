@@ -15,6 +15,6 @@ server.listen(port, () => {
 
 wss.on('connection', handleWebSocketConnection);
 
-app.get('/health', (req, res) => {
+app.get('/health', (res) => {
   res.status(200).send('Server is running...');
 });

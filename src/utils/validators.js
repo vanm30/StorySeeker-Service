@@ -17,7 +17,7 @@ export function validateMessageFormat(message) {
   //Validate Type
   const { type } = message || null;
   if (!type || !compiledSchemas[type]) {
-    console.log(`Message is missing type`);
+    console.log(`Message type is wrong or not defined`);
     return 0;
   }
 
