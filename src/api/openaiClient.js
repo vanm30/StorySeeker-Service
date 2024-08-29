@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import { schemas } from '../utils/getSchemas.js';
 
-export async function generateSugestions(query) {
+export async function generateSugestions(requestId, query) {
   const openai = new OpenAI();
   const schema = schemas['RESPONSE_GENERATE_SUGGESTION'];
   const suggestions = await openai.chat.completions.create({

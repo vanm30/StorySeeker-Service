@@ -20,15 +20,17 @@
   "REQUEST_GENERATE_SUGGESTION": {
     "type": "object",
     "properties": {
+      "requestId": { "type": "number" },
       "type": { "type": "string", "enum": ["REQUEST_GENERATE_SUGGESTION"] },
       "query": { "type": "string" }
     },
-    "required": ["type", "query"],
+    "required": ["type", "query", "requestId"],
     "additionalProperties": false
   },
   "RESPONSE_GENERATE_SUGGESTION": {
     "type": "object",
     "properties": {
+      "requestId": { "type": "number" },
       "type": { "type": "string", "enum": ["RESPONSE_GENERATE_SUGGESTION"] },
       "suggestions": {
         "type": "object",
@@ -100,7 +102,7 @@
         "additionalProperties": false
       }
     },
-    "required": ["type", "suggestions"],
+    "required": ["type", "suggestions", "requestId"],
     "additionalProperties": false
   }
 }

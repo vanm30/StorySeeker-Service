@@ -34,10 +34,10 @@ export function handleReceivedMessage(ws, message) {
 }
 
 export async function handleGenerateSuggestion(ws, parsedMessage) {
-  const { query } = parsedMessage;
+  const { requestId, query } = parsedMessage;
 
   console.log('Generating suggestions...');
-  const response = await generateSugestions(query);
+  const response = await generateSugestions(requestId, query);
 
   const parsedResponse = JSON.parse(response.choices[0].message.content);
   const { suggestions } = parsedResponse;
@@ -45,7 +45,7 @@ export async function handleGenerateSuggestion(ws, parsedMessage) {
   console.log(suggestions);
 
   ws.send(
-    createMessage('RESPONSE_GENERATE_SUGGESTION', {
+    createMessage(requestId, 'RESPONSE_GENERATE_SUGGESTION', {
       suggestions: suggestions,
     })
   );

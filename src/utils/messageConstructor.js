@@ -1,13 +1,13 @@
 import { schemas, compiledSchemas } from './getSchemas.js';
 
-export function createMessage(type, content) {
+export function createMessage(requestId, type, content) {
   const schema = schemas[type];
 
   if (!schema) {
     console.error(`Unknown message type: ${type}`);
     return null;
   }
-  const message = { type, ...content };
+  const message = { requestId, type, ...content };
 
   const validate = compiledSchemas[type];
   if (validate && !validate(message)) {
