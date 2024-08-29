@@ -20,7 +20,7 @@
   "REQUEST_GENERATE_SUGGESTION": {
     "type": "object",
     "properties": {
-      "requestId": { "type": "number" },
+      "requestId": { "type": "string" },
       "type": { "type": "string", "enum": ["REQUEST_GENERATE_SUGGESTION"] },
       "query": { "type": "string" }
     },
@@ -30,7 +30,7 @@
   "RESPONSE_GENERATE_SUGGESTION": {
     "type": "object",
     "properties": {
-      "requestId": { "type": "number" },
+      "requestId": { "type": "string" },
       "type": { "type": "string", "enum": ["RESPONSE_GENERATE_SUGGESTION"] },
       "suggestions": {
         "type": "object",
