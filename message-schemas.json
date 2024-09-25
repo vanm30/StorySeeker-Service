@@ -20,17 +20,15 @@
   "REQUEST_GENERATE_SUGGESTION": {
     "type": "object",
     "properties": {
-      "requestId": { "type": "string" },
       "type": { "type": "string", "enum": ["REQUEST_GENERATE_SUGGESTION"] },
       "query": { "type": "string" }
     },
-    "required": ["type", "query", "requestId"],
+    "required": ["type", "query"],
     "additionalProperties": false
   },
   "RESPONSE_GENERATE_SUGGESTION": {
     "type": "object",
     "properties": {
-      "requestId": { "type": "string" },
       "type": { "type": "string", "enum": ["RESPONSE_GENERATE_SUGGESTION"] },
       "suggestions": {
         "type": "object",
@@ -40,16 +38,46 @@
             "items": {
               "type": "object",
               "properties": {
-                "name": { "type": "string" },
-                "coverImage": { "type": "string" },
-                "link": { "type": "string" },
-                "shortDesc": { "type": "string" },
-                "plot": { "type": "string" },
-                "genre": { "type": "string" },
-                "rating": { "type": "string" },
-                "author": { "type": "string" },
-                "ISBN": { "type": "string" },
-                "pageCount": { "type": "string" }
+                "name": {
+                  "type": "string",
+                  "description": "Full name of the book."
+                },
+                "coverImage": {
+                  "type": "string",
+                  "description": "Link to an open-source cover image of the book."
+                },
+                "link": {
+                  "type": "string",
+                  "description": "Link to the wiki page of the book."
+                },
+                "shortDesc": {
+                  "type": "string",
+                  "description": "Short description of plot. Max two sentences."
+                },
+                "plot": {
+                  "type": "string",
+                  "description": "Spoiler free plot."
+                },
+                "genre": {
+                  "type": "string",
+                  "description": "Genre of the book."
+                },
+                "rating": {
+                  "type": "string",
+                  "description": "Rating based on reviews."
+                },
+                "author": {
+                  "type": "string",
+                  "description": "Author of the book."
+                },
+                "ISBN": {
+                  "type": "string",
+                  "description": "ISBN code of the book."
+                },
+                "pageCount": {
+                  "type": "string",
+                  "description": "Number of pages of the book."
+                }
               },
               "required": [
                 "name",
@@ -71,16 +99,46 @@
             "items": {
               "type": "object",
               "properties": {
-                "name": { "type": "string" },
-                "coverImage": { "type": "string" },
-                "link": { "type": "string" },
-                "shortDesc": { "type": "string" },
-                "plot": { "type": "string" },
-                "genre": { "type": "string" },
-                "rating": { "type": "string" },
-                "director": { "type": "string" },
-                "boxOffice": { "type": "string" },
-                "runtime": { "type": "string" }
+                "name": {
+                  "type": "string",
+                  "description": "Full name of the movie title."
+                },
+                "coverImage": {
+                  "type": "string",
+                  "description": "Link to an open-source cover image of the movie."
+                },
+                "link": {
+                  "type": "string",
+                  "description": "Link to the wiki page of the movie."
+                },
+                "shortDesc": {
+                  "type": "string",
+                  "description": "Short description of plot. Max two sentences."
+                },
+                "plot": {
+                  "type": "string",
+                  "description": "Spoiler free plot."
+                },
+                "genre": {
+                  "type": "string",
+                  "description": "Genre of the movie."
+                },
+                "rating": {
+                  "type": "string",
+                  "description": "Rating based on reviews."
+                },
+                "director": {
+                  "type": "string",
+                  "description": "Director of the movie."
+                },
+                "boxOffice": {
+                  "type": "string",
+                  "description": "Net profit of the movie."
+                },
+                "runtime": {
+                  "type": "string",
+                  "description": "How long the movie is."
+                }
               },
               "required": [
                 "name",
@@ -102,7 +160,7 @@
         "additionalProperties": false
       }
     },
-    "required": ["type", "suggestions", "requestId"],
+    "required": ["type", "suggestions"],
     "additionalProperties": false
   }
 }
