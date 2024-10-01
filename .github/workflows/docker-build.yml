@@ -27,6 +27,12 @@ jobs:
         run: |
           docker build -t storyseeker-service .
 
+      - name: Check Docker Username
+        run: echo "Docker Username - '${{ secrets.DOCKER_USERNAME }}'"
+
+      - name: List Docker Images
+        run: docker images
+
       - name: Tag Docker image
         run: |
           docker tag storyseeker-service ${{ secrets.DOCKER_USERNAME }}/storyseeker-service:latest
