@@ -29,7 +29,8 @@ jobs:
 
     - name: Push Docker image to Docker Hub
       run: |
-        docker push storyseeker-service
+        docker tag storyseeker-service ${{ secrets.DOCKER_USERNAME }}/storyseeker-service:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/storyseeker-service:latest
 
     - name: SSH to server and run Docker container
       uses: appleboy/ssh-action@v0.1.5
