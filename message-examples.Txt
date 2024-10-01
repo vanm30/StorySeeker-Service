@@ -1,4 +1,0 @@
-{"requestId": "123", "type": "ACK", "message": "Connection established" }
-{"requestId": "123", "type": "ERROR", "message": "Error occured" }
-{"requestId": "123", "type": "REQUEST_GENERATE_SUGGESTION", "query": "I would like to watch a horror movie or read a horror book"}
-{"requestId": "123", "type": "RESPONSE_GENERATE_SUGGESTION", "suggestions": "Skibidi toaleta" }
