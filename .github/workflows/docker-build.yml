@@ -27,19 +27,13 @@ jobs:
         run: |
           docker build -t storyseeker-service .
 
-      - name: Check Docker Username
-        run: echo "Docker Username - '${{secrets.DOCKER_USERNAME}}'"
-
-      - name: List Docker Images
-        run: docker images
-
       - name: Tag Docker image
         run: |
-          docker tag storyseeker-service ${{ secrets.DOCKER_USERNAME }}/storyseeker-service:latest
+          docker tag storyseeker-service "${{ secrets.DOCKER_USERNAME }}/storyseeker-service:latest"
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/storyseeker-service:latest
+          docker push "${{ secrets.DOCKER_USERNAME }}/storyseeker-service:latest"
 
       - name: SSH to server and run Docker container
         uses: appleboy/ssh-action@v0.1.5
