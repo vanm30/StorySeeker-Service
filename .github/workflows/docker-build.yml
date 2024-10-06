@@ -21,15 +21,15 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t storyseeker-service .
+          docker build -t core-api .
 
       - name: Tag Docker image
         run: |
-          docker tag storyseeker-service "${{ secrets.DOCKER_USERNAME }}/storyseeker-service:latest"
+          docker tag core-api "${{ secrets.DOCKER_USERNAME }}/core-api:latest"
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push "${{ secrets.DOCKER_USERNAME }}/storyseeker-service:latest"
+          docker push "${{ secrets.DOCKER_USERNAME }}/core-api:latest"
 
       - name: SSH to server and run Docker container
         uses: appleboy/ssh-action@v0.1.5
@@ -38,13 +38,13 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |  
-            docker pull "${{ secrets.DOCKER_USERNAME }}/storyseeker-service:latest"
+            docker pull "${{ secrets.DOCKER_USERNAME }}/core-api:latest"
             
-            docker stop storyseeker-service || true
-            docker rm storyseeker-service || true
+            docker stop core-api || true
+            docker rm core-api || true
             
             docker run -d \
               -e OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}" \
               -p 8080:8080 \
-              --name storyseeker-service \
-              ${{ secrets.DOCKER_USERNAME }}/storyseeker-service:latest
+              --name core-api \
+              ${{ secrets.DOCKER_USERNAME }}/core-api:latest
