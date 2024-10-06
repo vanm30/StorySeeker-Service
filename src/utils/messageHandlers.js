@@ -1,18 +1,23 @@
-import { generateSugestions } from '../api/openaiClient.js';
-import { createMessage } from './messageConstructor.js';
+import { schemas, compiledSchemas } from './getSchemas.js';
 
-export async function handleGenerateSuggestion(res, parsedMessage) {
-  const { requestId, query } = parsedMessage;
+export function createMessage(type, content) {
+  const schema = schemas[type];
 
-  console.log('Generating suggestions...');
-  const response = await generateSugestions(requestId, query);
+  if (!schema) {
+    console.error(`Unknown message type: ${type}`);
+    return null;
+  }
+  const message = { type, ...content };
 
-  const parsedResponse = JSON.parse(response.choices[0].message.content);
-  const { suggestions } = parsedResponse;
+  const validate = compiledSchemas[type];
+  if (validate && !validate(message)) {
+    console.error(
+      `Invalid message format for type ${type}: ${ajv.errorsText(
+        validate.errors
+      )}`
+    );
+    return null;
+  }
 
-  res.status(200).json(
-    createMessage(requestId, 'RESPONSE_GENERATE_SUGGESTION', {
-      suggestions: suggestions,
-    })
-  );
+  return JSON.stringify(message);
 }

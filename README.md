@@ -1,17 +1,12 @@
-# StorySeeker Backend
+# Core API Service 
 
-StorySeeker Backend is an Express.js server that provides API endpoints for the StorySeeker application, which delivers book and movie recommendations.
-
-# Demo
-
-You can view the app here.
+Express.js server that provides API endpoints for my applications.
 
 # Running Locally
 
 #### 1. Clone the Repository:
 
-git clone https://github.com/yourusername/storyseeker-backend.git
-cd storyseeker-backend
+https://github.com/vanm30/core-api.git
 
 #### 2. Install Dependencies:
 
@@ -24,8 +19,4 @@ The server will be running at http://localhost:8080
 
 # Deployed
 
-You do not have to run this server locally to use this app.
-
-# License
-
-This project is licensed under the MIT License.
+Core API Service automatically deploys each push to main.
