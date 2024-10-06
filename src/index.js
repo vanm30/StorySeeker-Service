@@ -2,9 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import { createServer } from 'http';
 
-import { createMessage } from './utils/messageConstructor.js';
-import { handleGenerateSuggestion } from './utils/messageHandlers.js';
+import { createMessage } from './utils/messageHandlers.js';
 import { validateMessageFormat } from './utils/validators.js';
+import { handleGenerateSuggestion } from './internal-api/storySeeker.js';
 
 const app = express();
 const server = createServer(app);
