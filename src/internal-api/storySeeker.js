@@ -1,13 +1,11 @@
-import { error } from 'ajv/dist/vocabularies/applicator/dependencies.js';
 import { generateSugestions } from '../external-api/openaiClient.js';
-import { createMessage } from '../utils/messageHandlers.js';
 
 export async function handleGenerateSuggestion(res, parsedMessage) {
   const { query } = parsedMessage;
 
   try {
     const response = await generateSugestions(query);
-    console.log(`Received response: ${response}`);
+    console.log(`Received response:`, JSON.stringify(response, null, 2));
 
     const suggestions = response.choices[0]?.message?.content;
     console.log(`Parsed Suggestions: ${suggestions}`);
@@ -16,11 +14,7 @@ export async function handleGenerateSuggestion(res, parsedMessage) {
       throw new Error('No suggestions received from the API');
     }
 
-    res.status(200).json(
-      createMessage('RESPONSE_GENERATE_SUGGESTION', {
-        suggestions: suggestions,
-      })
-    );
+    res.status(200).json(suggestions);
   } catch (e) {
     console.error('Error generating suggestions:', e.message);
     res
