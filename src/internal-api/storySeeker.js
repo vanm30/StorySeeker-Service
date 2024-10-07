@@ -1,21 +1,27 @@
+import { error } from 'ajv/dist/vocabularies/applicator/dependencies.js';
 import { generateSugestions } from '../external-api/openaiClient.js';
 import { createMessage } from '../utils/messageHandlers.js';
 
 export async function handleGenerateSuggestion(res, parsedMessage) {
-  const { requestId, query } = parsedMessage;
+  const { query } = parsedMessage;
 
-  console.log('Generating suggestions...');
-  const response = await generateSugestions(requestId, query);
+  try {
+    const response = await generateSugestions(query);
+    const suggestions = response.choices[0].message.content;
 
-  console.log(`Parsing: ${JSON.stringify(response)}`);
-  const parsedResponse = JSON.parse(response.choices[0].message.content);
-  const { suggestions } = parsedResponse;
+    if (!suggestions) {
+      throw new Error('No suggestions received from the API');
+    }
 
-  console.log(`Sending response ${suggestions}`);
-
-  res.status(200).json(
-    createMessage(requestId, 'RESPONSE_GENERATE_SUGGESTION', {
-      suggestions: suggestions,
-    })
-  );
+    res.status(200).json(
+      createMessage('RESPONSE_GENERATE_SUGGESTION', {
+        suggestions: suggestions,
+      })
+    );
+  } catch (e) {
+    console.error('Error generating suggestions:', error.message);
+    res
+      .status(500)
+      .json({ error: error.message || 'Failed to generate suggestions' });
+  }
 }
