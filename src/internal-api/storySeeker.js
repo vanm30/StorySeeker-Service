@@ -7,7 +7,7 @@ export async function handleGenerateSuggestion(res, parsedMessage) {
   console.log('Generating suggestions...');
   const response = await generateSugestions(requestId, query);
 
-  console.log(`Parsing: ${response}`);
+  console.log(`Parsing: ${JSON.stringify(response)}`);
   const parsedResponse = JSON.parse(response.choices[0].message.content);
   const { suggestions } = parsedResponse;
 
