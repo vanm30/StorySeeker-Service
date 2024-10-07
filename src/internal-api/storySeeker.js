@@ -7,9 +7,12 @@ export async function handleGenerateSuggestion(res, parsedMessage) {
 
   try {
     const response = await generateSugestions(query);
-    const suggestions = response.choices[0].message.content;
+    console.log(`Received response: ${response}`);
 
-    if (!suggestions) {
+    const suggestions = response.choices[0]?.message?.content;
+    console.log(`Parsed Suggestions: ${suggestions}`);
+
+    if (!suggestions || !response) {
       throw new Error('No suggestions received from the API');
     }
 
@@ -19,9 +22,9 @@ export async function handleGenerateSuggestion(res, parsedMessage) {
       })
     );
   } catch (e) {
-    console.error('Error generating suggestions:', error.message);
+    console.error('Error generating suggestions:', e.message);
     res
       .status(500)
-      .json({ error: error.message || 'Failed to generate suggestions' });
+      .json({ error: e.message || 'Failed to generate suggestions' });
   }
 }
