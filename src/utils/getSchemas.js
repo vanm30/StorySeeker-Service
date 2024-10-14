@@ -4,10 +4,20 @@ import Ajv from 'ajv';
 
 const ajv = new Ajv();
 
-const schemaFilePath = path.resolve('message-schemas.json');
-export const schemas = JSON.parse(fs.readFileSync(schemaFilePath, 'utf-8'));
+export function getCompiledSchema(schemaKey) {
+  const schemaFilePath = path.resolve('message-schemas.json');
 
-export const compiledSchemas = {};
-Object.keys(schemas).forEach((key) => {
-  compiledSchemas[key] = ajv.compile(schemas[key]);
-});
+  try {
+    const schemas = JSON.parse(fs.readFileSync(schemaFilePath, 'utf-8'));
+
+    if (!schemas[schemaKey]) {
+      throw new Error(`Schema with key '${schemaKey}' does not exist.`);
+    }
+
+    const compiledSchema = ajv.compile(schemas[schemaKey]);
+    return compiledSchema;
+  } catch (error) {
+    console.error('Error loading or compiling schema:', error.message);
+    throw new Error('Failed to load schema: ' + error.message);
+  }
+}
