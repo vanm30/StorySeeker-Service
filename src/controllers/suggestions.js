@@ -1,4 +1,4 @@
-import { generateSugestions } from '../services/openaiClient';
+import { generateSugestions } from '../services/openaiClient.js';
 
 const handleSuggestionRequest = async (res, req) => {
   const { query } = req.body;
