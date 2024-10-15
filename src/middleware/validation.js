@@ -10,6 +10,8 @@ const validateSuggestions = [
 
 const handleValidationErrors = (res, req, next) => {
   console.log('Validating request...');
+  console.log('Request body:', req.body);
+  console.log('Checking field "query":', req.body?.query);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
