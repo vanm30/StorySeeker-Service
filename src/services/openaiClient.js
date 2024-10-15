@@ -5,8 +5,8 @@ export async function generateSugestions(query) {
   const openai = new OpenAI();
 
   try {
-    const schema = getCompiledSchema('RESPONSE_GENERATE_SUGGESTION');
-    console.log('Using schemaL', schema);
+    const compiledSchema = getCompiledSchema('RESPONSE_GENERATE_SUGGESTION');
+    console.log('Using schema: ', JSON.stringify(schema, null, 2));
 
     const response = await openai.chat.completions.create({
       messages: [
@@ -27,7 +27,7 @@ export async function generateSugestions(query) {
         type: 'json_schema',
         json_schema: {
           name: 'RESPONSE_GENERATE_SUGGESTION',
-          schema: schema,
+          schema: compiledSchema.schema,
           strict: true,
         },
       },
