@@ -8,14 +8,18 @@ const validateSuggestions = [
     .withMessage('Query cannot be empty'),
 ];
 
-const handleValidationErrors = (req, res, next) => {
+const handleValidationErrors = (res, req, next) => {
+  console.log('Validating request...');
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    console.log('Validation failed:', errors.array());
     return res.status(400).json({
       status: 'error',
       errors: errors.array(),
     });
   }
+  console.log('Validation OK');
   next();
 };
 
