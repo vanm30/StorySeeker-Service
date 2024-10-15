@@ -8,7 +8,7 @@ const validateSuggestions = [
     .withMessage('Query cannot be empty'),
 ];
 
-const handleValidationErrors = (res, req, next) => {
+const handleValidationErrors = (req, res, next) => {
   console.log('Validating request...');
   console.log('Request body:', req.body);
   console.log('Checking field "query":', req.body?.query);

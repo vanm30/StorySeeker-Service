@@ -1,8 +1,8 @@
 import { generateSugestions } from '../services/openaiClient.js';
 
-const handleSuggestionRequest = async (res, req) => {
+const handleSuggestionRequest = async (req, res) => {
   console.log('Received request body:', req.body);
-  
+
   const { query } = req.body;
 
   try {
@@ -11,7 +11,7 @@ const handleSuggestionRequest = async (res, req) => {
     const response = await generateSugestions(query);
     console.log(`Received response:`, JSON.stringify(response, null, 2));
 
-    const suggestions = response.choices[0]?.message?.content;   
+    const suggestions = response.choices[0]?.message?.content;
 
     if (!suggestions || !response) {
       throw new Error('No suggestions received from the API');
