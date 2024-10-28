@@ -44,7 +44,7 @@ jobs:
             docker rm core-api || true
             
             docker run -d \
-              --restart unless-stopped
+              --restart unless-stopped \
               -e OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}" \
               -p 8080:8080 \
               --name core-api \
