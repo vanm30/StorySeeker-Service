@@ -1,16 +1,16 @@
 import cors from 'cors';
 
-const corseWhitelist = ['http://testapp.mvanik.com', 'http://localhost:3000'];
+const corseWhitelist = ['https://storyseeker.mvanik.com'];
 
 const corsOptions = {
   origin: (origin, callback) => {
-    if (!origin || corseWhitelist.indexOf(origin) !== -1) {
+    if (origin && corseWhitelist.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ['GET', 'POST', 'PUT', 'DLETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
