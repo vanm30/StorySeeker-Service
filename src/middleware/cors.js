@@ -7,6 +7,7 @@ const corseWhitelist =
 
 const corsOptions = {
   origin: (origin, callback) => {
+    console.log('New connection from:', origin);
     if (origin && corseWhitelist.includes(origin)) {
       callback(null, true);
     } else {
