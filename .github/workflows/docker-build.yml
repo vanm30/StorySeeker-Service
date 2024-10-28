@@ -46,6 +46,7 @@ jobs:
             docker run -d \
               --restart unless-stopped \
               -e OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}" \
+              -e NODE_ENV=production  \
               -p 8080:8080 \
               --name core-api \
               ${{ secrets.DOCKER_USERNAME }}/core-api:latest

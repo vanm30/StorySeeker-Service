@@ -1,6 +1,9 @@
 import cors from 'cors';
 
-const corseWhitelist = ['https://storyseeker.mvanik.com'];
+const corseWhitelist =
+  process.env.NODE_ENV === 'production'
+    ? ['https://api.mvanik.com']
+    : ['http://localhost:3000'];
 
 const corsOptions = {
   origin: (origin, callback) => {
