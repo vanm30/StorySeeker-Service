@@ -2,8 +2,8 @@ import cors from 'cors';
 
 const corseWhitelist =
   process.env.NODE_ENV === 'production'
-    ? ['https://api.mvanik.com']
-    : ['http://localhost:3000'];
+    ? ['https://mvanik.com', /https:\/\/.*\.mvanik\.com$/]
+    : ['http://localhost:3001'];
 
 const corsOptions = {
   origin: (origin, callback) => {
