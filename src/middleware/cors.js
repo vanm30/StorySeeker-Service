@@ -2,13 +2,16 @@ import cors from 'cors';
 
 const corseWhitelist =
   process.env.NODE_ENV === 'production'
-    ? ['https://mvanik.com', /https:\/\/.*\.mvanik\.com$/]
-    : ['http://localhost:3001'];
+    ? 'https://mvanik.com'  // Only main domain for simplicity
+    : 'http://localhost:3001';
 
 const corsOptions = {
   origin: (origin, callback) => {
     console.log('New connection from:', origin);
-    if (origin && corseWhitelist.includes(origin)) {
+
+    const isAllowed = origin && (origin === corseWhitelist || origin.endsWith('.mvanik.com'));
+
+    if (isAllowed) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
