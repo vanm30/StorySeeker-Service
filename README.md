@@ -19,4 +19,4 @@ The server will be running at http://localhost:8080
 
 # Deployed
 
-Core API Service automatically deploys each push to main.
+Core API Service automatically deploys to server each push to main.
